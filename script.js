@@ -292,7 +292,7 @@ console.log(Number.isInteger(23));
 console.log(Number.isInteger(23.0));
 console.log(Number.isInteger(23 / 0));
 
-*/
+
 
 console.log(Math.sqrt(25));
 console.log(25 ** (1 / 2)); // Same as finding the roots
@@ -334,3 +334,53 @@ console.log((2.7).toFixed(0)); // .toFixed always returns a string
 console.log((2.7).toFixed(3)); // 3 decimal points
 console.log((2.345).toFixed(2)); // 2 decimal points
 console.log(+(2.345).toFixed(2)); // 2 decimal points, converted to a number
+
+
+
+console.log(5 % 2); // remainder, = 1
+console.log(5 / 2);
+
+console.log(8 % 3);
+console.log(8 / 3);
+
+console.log(6 % 2);
+
+// const isEven = x => {
+//   if ((x % 2) == 0) {
+//     return console.log('It is even');
+//   } else return console.log("it's not even");
+// };
+
+// isEven(1)
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
+
+*/
+// Numeric Separators
+
+// 287,460,000,000
+const diameter = 287_460_000_000 // We can use the underscore as numeric separator
+console.log(diameter)
+
+
+const price = 345_99
+console.log(price)
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+console.log(transferFee1, transferFee2)
+
+// const PI = 3._1415 // You can't use underscore next to non-numbers. Must be between
+// console.log(PI)
+
+console.log(Number('230_000')) // does not work. Has to be a number
