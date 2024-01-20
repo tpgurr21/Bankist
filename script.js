@@ -81,10 +81,10 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
@@ -142,7 +142,7 @@ createUsernames(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -154,6 +154,21 @@ const updateUI = function (acc) {
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+// FAKE ALWAYS LOGGED IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+
+const now = new Date();
+const day = `${now.getDate()}`.padStart(2, 0);
+const month = `${now.getMonth() + 1}`.padStart(2, 0);
+const year = now.getFullYear();
+const hour = now.getHours();
+const min = now.getMinutes();
+labelDate.textContent = `${month}/${day}/${year}, ${hour}:${min}`;
+
+// month/day/year
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -244,7 +259,7 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount.acc.movements, !sorted); // DOUBLE CHECK THIS
   sorted = !sorted;
 });
 
@@ -365,7 +380,7 @@ labelBalance.addEventListener('click', function () {
   });
 });
 
-*/
+
 // Numeric Separators
 
 // 287,460,000,000
@@ -384,3 +399,73 @@ console.log(transferFee1, transferFee2)
 // console.log(PI)
 
 console.log(Number('230_000')) // does not work. Has to be a number
+
+
+
+console.log(2 ** 53 - 1)
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1)
+console.log(2 ** 53 + 2)
+console.log(2 ** 53 + 3)
+console.log(2 ** 53 + 4)
+
+console.log(48384838483828482838483828483848284n) // transforms into a "big int" number
+console.log(BigInt(48384838483828482838483828483848284)) // not as accurate
+
+// Operations
+console.log(10000n + 10000n)
+console.log(234590750392487532047823904n * 10000000n)
+// console.log(Math.sqrt(16n)); // This does not work with BigInts
+
+const huge = 229345023857903274903248n;
+const num = 23;
+// console.log(huge * num) // can't mix bigInt number and regular numbers
+console.log(huge * BigInt(num)) // this works though
+
+console.log(20n > 15); // This works
+console.log(20n === 20); // false
+console.log(typeof 20n); // returns "bigint"
+console.log(20n == '20'); // uses type conversion, so this works
+
+console.log(huge + ' is REALLY big!!!') // converts number to string
+
+// Divisions
+console.log(11n / 3n); // cuts off the decimal
+console.log(11 / 3);
+
+
+
+// Create a date
+const now = new Date();
+console.log(now)
+
+console.log(new Date('Jan 20 2024 17:09:47'));
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5))
+console.log(new Date(2037, 10, 31))
+
+console.log(new Date(0)) // unix initial time
+console.log(new Date(3 * 24 * 60 * 60 * 1000)) // 3 days after initial unix time
+
+
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23)
+console.log(future);
+console.log(future.getFullYear())
+console.log(future.getMonth())
+console.log(future.getDate()) // day of the month
+console.log(future.getDay()) // day of the week
+console.log(future.getHours()) 
+console.log(future.getMinutes()) 
+console.log(future.getSeconds()) 
+console.log(future.toISOString()) 
+
+console.log(new Date(21422569800000))
+
+console.log(Date.now());
+console.log(future)
+
+*/
