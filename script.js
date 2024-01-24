@@ -86,7 +86,7 @@ const formatMovementDate = function (date, locale) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
+  // console.log(daysPassed);
 
   if (daysPassed === 0) return 'Today';
   if (daysPassed === 1) return 'Yesterday';
@@ -99,17 +99,17 @@ const formatMovementDate = function (date, locale) {
   return new Intl.DateTimeFormat(locale).format(date);
 };
 
-const formatCur = function(value, locale, currency) {
+const formatCur = function (value, locale, currency) {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: currency,
   }).format(value);
-}
+};
 
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  console.log(acc.movements);
+  // console.log(acc.movements);
   const movs = sort
     ? acc.movements.slice().sort((a, b) => a - b)
     : acc.movements;
@@ -136,7 +136,7 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
- 
+
   labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
@@ -276,7 +276,8 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
+    setTimeout(function() {
+      // Add movement
     currentAccount.movements.push(amount);
 
     // Add loan date
@@ -284,7 +285,7 @@ btnLoan.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
-  }
+  }, 2500)}
   inputLoanAmount.value = '';
 });
 
@@ -537,8 +538,6 @@ const days1 = calcDaysPassed(
 );
 console.log(days1);
 
-*/
-
 // Internationalizing Numbers
 
 const num = 3884764.23;
@@ -557,3 +556,16 @@ console.log(
   'Browser: ',
   new Intl.NumberFormat(navigator.language, options).format(num)
 );
+
+*/
+
+// setTimeout
+const ingredients = ['olives', 'spinach']
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`),
+  3000,
+  ...ingredients
+);
+console.log('Waiting...');
+
+if(ingredients.includes('spinach')) clearTimeout(pizzaTimer)
