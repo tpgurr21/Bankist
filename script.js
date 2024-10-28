@@ -7,8 +7,6 @@
 /////////////////////////////////////////////////
 // Data
 
-// DIFFERENT DATA! Contains movement dates, currency and locale
-
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
@@ -17,16 +15,16 @@ const account1 = {
 
   movementsDates: [
     '2019-11-18T21:31:17.178Z',
-    '2019-12-23T07:42:02.383Z',
-    '2020-01-28T09:15:04.904Z',
-    '2020-04-01T10:17:24.185Z',
-    '2020-05-08T14:11:59.604Z',
-    '2024-01-15T14:43:26.374Z',
-    '2024-01-17T18:49:59.371Z',
-    '2024-01-21T12:01:20.894Z',
+    '2021-12-23T07:42:02.383Z',
+    '2023-01-28T09:15:04.904Z',
+    '2024-02-01T10:17:24.185Z',
+    '2024-03-08T14:11:59.604Z',
+    '2024-03-15T14:43:26.374Z',
+    '2024-04-17T18:49:59.371Z',
+    '2024-05-24T12:01:20.894Z',
   ],
-  currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  currency: 'USD',
+  locale: 'en-US', // de-DE
 };
 
 const account2 = {
@@ -36,20 +34,58 @@ const account2 = {
   pin: 2222,
 
   movementsDates: [
-    '2019-11-01T13:15:33.035Z',
-    '2019-11-30T09:48:16.867Z',
-    '2019-12-25T06:04:23.907Z',
-    '2020-01-25T14:18:46.235Z',
-    '2020-02-05T16:33:06.386Z',
-    '2024-01-15T14:43:26.374Z',
-    '2024-01-17T18:49:59.371Z',
-    '2024-01-21T12:01:20.894Z',
+    '2024-01-01T13:15:33.035Z',
+    '2024-02-30T09:48:16.867Z',
+    '2024-03-25T06:04:23.907Z',
+    '2024-04-25T14:18:46.235Z',
+    '2024-05-05T16:33:06.386Z',
+    '2024-05-15T14:43:26.374Z',
+    '2024-06-17T18:49:59.371Z',
+    '2024-06-21T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
 };
 
-const accounts = [account1, account2];
+const account3 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90, -20],
+  interestRate: 1,
+  pin: 3333,
+
+  movementsDates: [
+    '2023-03-04T13:15:33.035Z',
+    '2023-05-11T09:48:16.867Z',
+    '2023-06-23T06:04:23.907Z',
+    '2023-11-26T14:18:46.235Z',
+    '2023-12-07T16:33:06.386Z',
+    '2024-01-23T14:43:26.374Z',
+  ],
+  currency: 'USD',
+  locale: 'en-US',
+};
+
+const account4 = {
+  owner: 'Steven Thomas Williams',
+  movements: [2000, -200.9, 340.33, -300, -20.28, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 4444,
+
+  movementsDates: [
+    '2022-11-21T13:15:33.035Z',
+    '2022-11-30T09:48:16.867Z',
+    '2022-12-29T06:04:23.907Z',
+    '2023-01-23T14:18:46.235Z',
+    '2024-03-05T16:33:06.386Z',
+    '2024-04-15T14:43:26.374Z',
+    '2024-04-17T18:49:59.371Z',
+    '2024-08-21T12:01:20.894Z',
+  ],
+  currency: 'EUR',
+  locale: 'pt-PT', // de-DE
+};
+
+const accounts = [account1, account2, account3, account4];
 
 /////////////////////////////////////////////////
 // Elements
@@ -202,7 +238,7 @@ const startLogOutTimer = function () {
     time--;
   };
   // Set time to 5 minutes
-  let time = 120;
+  let time = 300;
 
   // Call the timer every second
   tick();
@@ -353,7 +389,7 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.acc.movements, !sorted); // DOUBLE CHECK THIS
+  displayMovements(currentAccount.acc, !sorted); // DOUBLE CHECK THIS
   sorted = !sorted;
 });
 
